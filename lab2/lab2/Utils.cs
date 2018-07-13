@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -38,6 +39,20 @@ namespace lab2
             A.CopyTo(bools, 0);
             B.CopyTo(bools, A.Count);
             return new BitArray(bools);
+        }
+
+        public static void CreateTextFile(string filename, int size)
+        {
+            string chars = "123467890ABCDEFGHJKLMNPQRTUVWXYZabcdefghjkmnpqrtuvwxyz!@#$%^&*()-=_+|{}][';~";
+            Random rng = new Random();
+
+            string content = "";
+            for (int i = 0; i < size * 1024; i++)
+            {
+                content += chars.Substring(rng.Next(chars.Length), 1);
+            }
+
+            File.WriteAllText(filename, content);
         }
     }
 }

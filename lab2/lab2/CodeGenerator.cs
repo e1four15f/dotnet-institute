@@ -9,19 +9,21 @@ namespace lab2
     class CodeGenerator
     {
         private Dictionary<string, int> tree;
-
         private Dictionary<char, string> code;
+
+        private FrequencyDictionary fd;
+
+        public FrequencyDictionary FD()
+        {
+            return fd;
+        }
+
         public Dictionary<char, string> Code() { return code; }
 
         public CodeGenerator()
         {
             tree = new Dictionary<string, int>();
             code = new Dictionary<char, string>();
-        }
-
-        public void GenerateCode()
-        {
-
         }
 
         public BitArray GetBinaryHeader(byte offset)
@@ -91,9 +93,11 @@ namespace lab2
             return bits;
         }
 
-        public void BuildTree(Dictionary<char, int> freq)
+        public void BuildTree(string path)
         {
-            foreach (KeyValuePair<char, int> kvp in freq)
+            fd = new FrequencyDictionary(path);
+
+            foreach (KeyValuePair<char, int> kvp in fd.Freq())
             {
                 tree.Add(kvp.Key.ToString(), kvp.Value);
                 code.Add(kvp.Key, "");

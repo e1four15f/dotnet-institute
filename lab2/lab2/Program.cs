@@ -9,88 +9,104 @@ namespace lab2
 {
     class Program
     {
-        private const string filename = "input";
-        private const string input = "files/" + filename + ".txt";
-        private const string output = "files/" + filename + ".pck ";
+        private const string path = "files/";
+        private static string input, output;
 
         static void Main(string[] args)
         {
-
-            FrequencyDictionary fd = new FrequencyDictionary(input);
-            Console.WriteLine("Input file size = " + Utils.GetFileSize(input) + " bytes\n" + fd);
-            
-            CodeGenerator cd = new CodeGenerator();
-            cd.BuildTree(fd.Freq());
-            Pack(input, output, cd);
-            Console.WriteLine("Output file size = " + Utils.GetFileSize(output) + " bytes\n" + cd);
-            
-            /*
-            CodeGenerator cd = new CodeGenerator();
-            Unpack(input, output, cd);
-            Console.WriteLine("Done!");
-            */
-            Console.ReadKey();
-        }
-
-        private static void Pack(string input, string output, CodeGenerator cd)
-        {
-            byte[] bytes = File.ReadAllBytes(input);
-
-            int size = 0;
-            foreach (byte b in bytes)
+            //TESTMODE();
+            while (true)
             {
-                size += cd.Code()[Convert.ToChar(b)].Length;
-            }
-            
-            BitArray bits = new BitArray(size);
-
-            int index = 0;
-            foreach (byte b in bytes)
-            {
-                for (int i = 0; i < cd.Code()[Convert.ToChar(b)].Length; i++, index++)
+                try
                 {
-                    bits[index] = (cd.Code()[Convert.ToChar(b)][i] == '1') ? true : false;
+                    string[] str = Console.ReadLine().Split(' ');
+                    if (str.Length == 1 && str[0].Equals("exit")) { break; }
+
+                    if (str.Length == 3)
+                    {
+                        input = path + str[1];
+                        output = path + str[2];
+
+                        if (str[0].Equals("-pack"))
+                        {
+                            Console.WriteLine("\nPacking...");
+
+                            Stopwatch timer = new Stopwatch();
+                            timer.Start();
+                            Packer.Pack(input, output);
+                            timer.Stop();
+
+                            Console.WriteLine("Pack done with " + timer.Elapsed +
+                                "\nPack quality " + (double)Utils.GetFileSize(output) / (double)Utils.GetFileSize(input)
+                                + "\n");
+                        }
+
+                        else if (str[0].Equals("-unpack"))
+                        {
+                            Console.WriteLine("\nUnpacking...");
+
+                            Stopwatch timer = new Stopwatch();
+                            timer.Start();
+                            Packer.Unpack(input, output);
+                            timer.Stop();
+
+                            Console.WriteLine("Unpack done with " + timer.Elapsed + "\n");
+                        }
+
+                        else if (str[0].Equals("-test"))
+                        {
+                            Console.WriteLine("\nCreating text file...");
+
+                            Stopwatch timer = new Stopwatch();
+                            timer.Start();
+                            Utils.CreateTextFile(path + str[1], int.Parse(str[2]));
+                            timer.Stop();
+
+                            Console.WriteLine("Creation done with " + timer.Elapsed + "\n");
+                        }
+
+                        else { throw new Exception("Invalid string format\n"); }
+                    }
+                    
+                    else { throw new Exception("Invalid string format\n"); }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
             }
-
-            byte offset = Convert.ToByte(bits.Length % 8 == 0 ? 0 : 8 - bits.Length % 8);
-
-            BitArray codes = cd.GetBinaryHeader(offset);
-            bool[] bools = new bool[bits.Count + codes.Count];
-            codes.CopyTo(bools, 0);
-            bits.CopyTo(bools, codes.Count);
-            BitArray all = new BitArray(bools);
-
-            bytes = new byte[all.Length / 8];
-            all.CopyTo(bytes, 0);
-
-            File.WriteAllBytes(output, bytes);
         }
-        
-        private static void Unpack(string input, string output, CodeGenerator cd)
+
+        private static void TESTMODE()
         {
-            BitArray bits = cd.ReadBinaryHeader(File.ReadAllBytes(output));
+            Console.WriteLine("TESTMODE");
+            TimeSpan time = new TimeSpan();
+            string input, output;
 
-            Dictionary<string, char> dict = new Dictionary<string, char>();
-            foreach (KeyValuePair<char, string> kvp in cd.Code())
+            input = path + "TESTMODE.txt";
+            output = path + "TESTMODE.bin";
+            
+            string[] str = Console.ReadLine().Split(' ');
+            int count = int.Parse(str[0]), size = int.Parse(str[1]);
+            Utils.CreateTextFile(input, size);
+
+            for (int i = 0; i < count; i++)
             {
-                dict.Add(kvp.Value, kvp.Key);
+                Console.WriteLine("Packing " + (i + 1) + " of " + count);
+
+                Stopwatch timer = new Stopwatch();
+                timer.Start();
+                Packer.Pack(input, output);
+                timer.Stop();
+
+                time += timer.Elapsed;
             }
 
-            string value = "", str = "";
-            for (int i = 0; i < bits.Length; i++)
-            {
-                value += bits[i] ? "1" : "0";
-                if (dict.ContainsKey(value))
-                {
-                    str += dict[value];
-                    // To see output
-                    //Console.Write(dict[value]);
-                    value = "";
-                }
-            }
-
-            File.WriteAllText(input, str);
+            Console.WriteLine("Done testing in " + time);
+            Console.Read();
+            Environment.Exit(0);
         }
+
+
     }
 }

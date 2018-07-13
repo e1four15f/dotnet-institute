@@ -17,7 +17,7 @@ namespace lab2
             ReadFile(path);
         }
         
-        public void ReadFile(string path)
+        private void ReadFile(string path)
         {
             using (StreamReader sr = new StreamReader(path))
             {
