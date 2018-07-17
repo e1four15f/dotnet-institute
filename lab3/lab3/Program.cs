@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace lab3
 {
@@ -11,24 +8,31 @@ namespace lab3
     {
         static void Main(string[] args)
         {
-            FileSearch fs = new FileSearch("files");
-
+            FileSearch fs = new FileSearch("files/books");
             Stopwatch timer = new Stopwatch();
+
             timer.Start();
             fs.BuildIndex();
             timer.Stop();
             Console.WriteLine("Done!\n" + timer.ElapsedMilliseconds + " ms\n");
 
-            //string phrase = "Jim did nothing"; 
-            string phrase = Console.ReadLine(); 
-            Console.WriteLine();
-            
-            timer.Restart();
-            fs.Find(phrase);
-            timer.Stop();
-            Console.WriteLine("\n" + timer.ElapsedMilliseconds + " ms\n");
-            
-            Console.Read();
+            string phrase = "";
+            while (true)
+            {
+                Console.Write("Search for or exit: ");
+                phrase = Console.ReadLine();
+
+                if (phrase.Equals("exit"))
+                {
+                    break;
+                }
+
+                timer.Restart();
+                fs.Find(phrase);
+                timer.Stop();
+                Console.WriteLine(fs);
+                Console.WriteLine(timer.ElapsedMilliseconds + " ms\n");
+            }
         }
     }
 }

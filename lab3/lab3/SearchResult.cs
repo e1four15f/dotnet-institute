@@ -8,46 +8,36 @@ namespace lab3
 {
     class SearchResult
     {
-        private Dictionary<string, List<long>> dict;
-        private string file;
+        private Dictionary<int, string> text;
+        private string file, fullText;
+        private int phraseLength;
 
-        public List<Tuple<long, List<Tuple<string, long>>>> scores;
-
-        public SearchResult()
+        public SearchResult(string file)
         {
-            dict = new Dictionary<string, List<long>>();
-        }
-
-        private void AddWord(string word, long position)
-        {
-            if (!dict.ContainsKey(word))
-            {
-                dict.Add(word, new List<long>());
-            }
-            dict[word].Add(position);
-        }
-
-        public void BuildIndex(string file)
-        {
+            text = new Dictionary<int, string>();
             this.file = file;
+        }
+
+        public void BuildIndex()
+        {
             Console.WriteLine("Indexing " + Path.GetFileName(file));
             using (StreamReader sr = File.OpenText(file))
             {
                 string punctuation = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\t\r";
 
                 string word = "";
-                long position = 0;
+                int position = 0;
 
                 while (sr.Peek() >= 0)
                 {
-                    char c = (char)sr.Read();
+                    char c = char.ToLower((char)sr.Read()); 
                     if (!punctuation.Contains(c))
                     {
                         if (c == ' ' || c == '\n')
                         {
                             if (!word.Equals(""))
                             {
-                                AddWord(word, position - word.Length);
+                                text.Add(position - word.Length, word);
                                 word = "";
                             }
                         }
@@ -55,79 +45,62 @@ namespace lab3
                         {
                             word += c;
                         }
-                        position++;
                     }
+                    position++;
                 }
             }
+            fullText = File.ReadAllText(file);
         }
 
-        public void Find(string phrase)
+        public List<string> Find(string phrase)
         {
             string[] words = phrase.Split(' ');
             string filename = Path.GetFileName(file);
-            SortedDictionary<long, string> finds = new SortedDictionary<long, string>();
 
-            foreach (string word in words)
+            phraseLength = 0;
+            for (int i = 0; i < words.Length; i++)
             {
-                if (dict.ContainsKey(word))
+                phraseLength += words[i].Length;
+                words[i] = words[i].ToLower();
+            }
+
+            List<string> phrases = new List<string>();
+            int count = 0, position = 0;
+            phrase = "";
+
+            foreach (KeyValuePair<int, string> kvp in text)
+            {
+                position = count == 0 ? kvp.Key : position;
+                if (kvp.Value.Equals(words[count]))
                 {
-                    for (int j = 0; j < dict[word].Count; j++)
+                    if (count == words.Length - 1)
                     {
-                        finds.Add(dict[word][j], word);
+                        phrases.Add(GetPhrase(position));
                     }
+                    count = count + 1 == words.Length ? 0 : count + 1;
+                }
+                else
+                {
+                    count = 0;
                 }
             }
 
-            scores = new List<Tuple<long, List<Tuple<string, long>>>>();
-
-            for (int i = 0; i < finds.Count - 1; i++) 
-            {
-                List<Tuple<string, long>> temp = new List<Tuple<string, long>>();
-                int count = Array.IndexOf(words, finds.ElementAt(i).Value);
-                long distance = 0;
-
-                temp.Add(new Tuple<string, long>(finds.ElementAt(i).Value, finds.ElementAt(i).Key));
-                for (int j = i + 1; j < finds.Count; j++) //  + 1
-                {
-                    count++;
-                    if (count != words.Length && finds.ElementAt(j).Value.Equals(words[count]))
-                    {
-                        distance += Math.Abs(finds.ElementAt(i).Key - finds.ElementAt(j).Key) - 
-                            (finds.ElementAt(i).Value.Length + finds.ElementAt(j).Value.Length);
-                        temp.Add(new Tuple<string, long>(finds.ElementAt(j).Value, finds.ElementAt(j).Key));
-                    }
-                    else
-                    {
-                        distance /= temp.Count^10;
-                        if (distance == 0)
-                        {
-                            distance = finds.ElementAt(i).Key;
-                        }
-                        scores.Add(new Tuple<long, List<Tuple<string, long>>>(distance, temp));
-                        break;
-                    }
-                }
-            }
-
-            scores.Sort((x, y) => -y.Item1.CompareTo(x.Item1));
+            return phrases;
         }
-        
-        public override string ToString()
+
+        private string GetPhrase(int line)
         {
-            int size = scores.Count < 5 ? scores.Count : 5;
-
-            string str = scores.Count > 0 ? "\n" + Path.GetFileName(file) + "\n" : "";
-            for (int i = 0; i < size; i++)
+            string phrase = "...";
+            for (int i = 0; i < phraseLength + 40; i++)
             {
-                str += String.Format("{0, 10}", scores[i].Item1);
-                foreach (Tuple<string, long> tuple in scores[i].Item2)
+                char c = fullText[line + i - 20];
+                if (c.Equals('\n') || c.Equals('\r'))
                 {
-                    str += " " + tuple.Item1;
+                    c = ' ';
                 }
-                str += "\n";
+                phrase += c;
             }
-
-            return str;
+            return phrase + "...";
         }
     }
 }

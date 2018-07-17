@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9C5C986E-B1B0-4C32-8C8B-E4E18A02AAFD}</ProjectGuid>
+    <ProjectGuid>{EF1EA416-A79E-44D5-9033-B1C3588A8FC1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>lab3</RootNamespace>
@@ -43,9 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileSearch.cs" />
-    <Compile Include="SearchResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
