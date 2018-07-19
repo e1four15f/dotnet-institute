@@ -8,7 +8,7 @@ namespace lab3
     {
         static void Main(string[] args)
         {
-            FileSearch fs = new FileSearch("files/books");
+            FileSearch fs = new FileSearch("../../files/books");
             Stopwatch timer = new Stopwatch();
 
             timer.Start();
@@ -32,6 +32,7 @@ namespace lab3
                 timer.Stop();
                 Console.WriteLine(fs);
                 Console.WriteLine(timer.ElapsedMilliseconds + " ms\n");
+             
             }
         }
     }

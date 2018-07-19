@@ -9,7 +9,7 @@ namespace lab2
 {
     class Program
     {
-        private const string path = "files/";
+        private const string path = "../../files/";
         private static string input, output;
 
         static void Main(string[] args)
