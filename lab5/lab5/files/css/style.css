@@ -1,0 +1,459 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+* {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
+  text-decoration: none;
+  outline: none;
+}
+
+h1, h2, h3, span {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+button {
+  cursor: pointer;
+}
+
+.white, a {
+  color: #fff;
+}
+
+.pink {
+  color: #fc635e;
+}
+
+.container {
+  max-width: 940px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin: 5% 20%;
+}
+
+.title hr {
+  border: 0;
+  margin: 0 30%;
+  border-bottom: 1px solid #adadad;
+}
+
+section {
+  overflow: hidden;
+}
+
+.info h3:before, .info h3:after {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+  width: 10px;
+  height: 35px;
+  margin: 0 10px 8px 10px;
+  background-color: #fc635e;
+}
+
+.info {
+  margin: 0 10px;
+}
+
+/* Header */
+
+header {
+  background: url(../image/bg-header.jpg) no-repeat;
+  background-size: cover;
+  color: #fff;
+}
+
+#logo {
+  width: 100%;
+  height: 100%;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+nav .logo {
+  display: flex;
+  margin: 2% 0;
+}
+
+nav h3 {
+  display: inline;
+}
+
+nav ul li {
+  margin: 0 20px;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+nav ul li a:hover {
+  color: #fc635e;
+  border-bottom: 4px solid #fc635e;
+  padding-bottom: 5px;
+}
+
+nav .logo h3 {
+  text-transform: none;
+}
+
+header h1 {
+  margin-top: 20%;
+  overflow: hidden;
+}
+
+header h1:before, header h1:after {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+  width: 100%;
+  height: 8px;
+  margin: 0 10px 8px 10px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+header h1:before {
+  margin-left: -100%;
+}
+
+header h1:after {
+  margin-right: -100%;
+}
+
+.line {
+  opacity: 0.2;
+}
+
+.btn-1 {
+  border: 2px solid #fc635e;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0);
+  margin-top: 1%;
+  margin-bottom: 20%;
+  padding: 10px 40px;
+}
+
+.arrow {
+  margin: 20px;
+}
+
+/* What can you recieve */
+
+#what-can {
+  color: #adadad;
+}
+
+#what-can h2, #what-can h3 {
+  color: #868686;
+}
+
+.egg {
+  align-self: flex-start;
+  flex: 1;
+  margin: 0 1%;
+  align-self: stretch;
+}
+
+.egg hr {
+  border: 0;
+  border-top: 1px solid #adadad;
+  margin: -10px 30% 0 30%;
+}
+
+/* Expand you business */
+
+#expand {
+  background: url(../image/bg-expand.jpg) no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+#expand .title {
+  color: #fff;
+  margin-top: 20%;
+}
+
+.border {
+  margin: 5% 0;
+  border: 8px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Our process */
+#process {
+  color: #868686;
+}
+
+#process .flex {
+  height: 300px;
+}
+
+#process .egg {
+
+}
+
+#step-1, #step-4 {
+  align-self: center;
+}
+
+#step-2 {
+  align-self: flex-end;
+}
+
+#step-3 {
+  align-self: flex-start;
+}
+
+#step-4 {
+  flex: 2;
+}
+
+/* What od we do? */
+#what-do {
+  background-color: #f2f2f2;
+  color: #868686;
+}
+
+#what-do .info h3:after {
+  display: none;
+}
+
+#what-do .info {
+  text-align: left;
+}
+
+.block-img {
+  max-width: 50%;
+}
+
+.btn-2 {
+  border: 0;
+  border-radius: 5px;
+  background-color: #fc635e;
+  color: #fff;
+  margin-top: 1%;
+  margin-bottom: 20%;
+  padding: 10px 40px;
+}
+
+/* Adversiting */
+#adversiting {
+  padding-top: 4%;
+  color: #868686;
+}
+
+#adversiting .info h3:before {
+  display: none;
+}
+
+#adversiting .info {
+  text-align: right;
+}
+
+/* Marketing kit */
+#marketing {
+  padding-top: 4%;
+  background-color: #f2f2f2;
+  color: #868686;
+}
+
+#marketing .info h3:after {
+  display: none;
+}
+
+#marketing .info {
+  text-align: left;
+}
+
+/* Portfolio */
+#portfolio {
+  padding-top: 4%;
+  color: #868686;
+}
+
+#portfolio li a {
+  color: #fc635e;
+}
+
+#portfolio li {
+  margin: 0 20px;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+#portfolio li a:hover {
+  border: 0;
+  color: #868686;
+}
+
+#portfolio nav .flex {
+  display: flex;
+  padding: 10px 0;
+  justify-content: space-between;
+  border-top: 1px solid #868686;
+  border-bottom: 1px solid #868686;
+}
+
+#portfolio .flex a {
+  flex: 1;
+  margin: 5px;
+  height: 200px;
+}
+
+#first-flex a:first-child {
+  flex-grow: 2;
+}
+
+#last-flex a:last-child {
+  flex-grow: 2;
+}
+
+#pic-1 {
+  background: url(../image/pic-1.jpg) no-repeat;
+  background-size: cover;
+}
+
+#pic-2 {
+  background: url(../image/pic-2.jpg) no-repeat;
+  background-size: cover;
+}
+
+#pic-3 {
+  background: url(../image/pic-3.jpg) no-repeat;
+  background-size: cover;
+}
+
+#pic-4 {
+  background: url(../image/pic-4.jpg) no-repeat;
+  background-size: cover;
+}
+
+#pic-5 {
+  background: url(../image/pic-5.jpg) no-repeat;
+  background-size: cover;
+}
+
+#pic-6 {
+  background: url(../image/pic-6.jpg) no-repeat;
+  background-size: cover;
+}
+
+#pic-1:hover {
+
+    background-color: #fc635e;
+}
+
+#portfolio .flex a:hover {
+  background-color: #fc635e;
+}
+
+#portfolio .btn-2 {
+  margin-bottom: 0;
+}
+
+/* Our Team */
+#our-team {
+  background-color: #f2f2f2;
+  color: #565656;
+}
+
+#our-team .flex {
+  align-items: stretch;
+}
+
+.team {
+  flex: 1;
+}
+
+.circle-icon {
+  display: inline-block;
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  padding: 3px;
+  margin: 0 5px;
+  border-radius: 50%;
+  background-color: #565656;
+}
+
+.circle-icon:hover {
+  background-color: #fc635e;
+}
+
+/* Alan Richman */
+#alan {
+  margin-top: 50px;
+  margin-bottom: 150px;
+  color: #868686;
+}
+
+#alan .flex p, #alan .flex div {
+  flex: 1;
+}
+
+#alan .flex {
+  margin: 80px 0;
+}
+
+#alan img {
+  margin: 0 10px;
+}
+
+/* Map */
+#map {
+  background: url(../image/map.jpg) no-repeat;
+  background-size: cover;
+  color: #fff;
+  overflow: visible;
+  height: 400px;
+}
+
+#map-title {
+  height: 250px;
+  width: 250px;
+  margin: 0 auto;
+  background: url(../image/hex.png) no-repeat center;
+  background-size: contain;
+  position: relative;
+  top: -100px;
+}
+
+#map-title h2, #map-title p {
+  position: relative;
+  top: 60px;
+  margin: 0 20px;
+  text-transform: capitalize;
+}
+
+#map-title p {
+  margin-top: 10px;
+}
+
+/* Footer */
+#footer {
+  background: url(../image/bg-footer.jpg) no-repeat;
+  background-size: cover;
+  height: 200px;
+  color: #fff;
+}
+
+#footer .flex {
+  justify-content: center;
+}
+
+#footer .logo {
+  align-self: center;
+}
