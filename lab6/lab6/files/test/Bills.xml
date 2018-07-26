@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bills>
+	<Bill Client="Медсервис" Date="05.05.2016" Number="0045345" Sum="100"/>
+	<Bill Client="Медсервис" Date="01.05.2016" Number="001567" Sum="200"/>
+</Bills>

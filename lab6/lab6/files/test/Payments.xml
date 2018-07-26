@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Payments>
+  <Payment Client="Медсервис" PayDocDate="01.08.2016" PayDocNumber="p9456" BillDate="01.05.2016" BillNumber="001567" Sum="150" />
+  <Payment Client="Медсервис" PayDocDate="07.08.2016" PayDocNumber="p123" BillDate="01.05.2016" BillNumber="001567" Sum="50" />
+  <Payment Client="Медсервис" PayDocDate="07.08.2016" PayDocNumber="p123" BillDate="05.05.2016" BillNumber="0045345" Sum="20" />
+</Payments>
