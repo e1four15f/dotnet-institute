@@ -9,6 +9,7 @@ namespace lab1
 
         static void Main(string[] args)
         {
+            Console.ReadKey();
             int N = 0;
             while (true)
             {
@@ -47,6 +48,7 @@ namespace lab1
                 }
             }
 
+            Console.WriteLine("Done!");
             Console.Read();
         }
 
