@@ -130,11 +130,11 @@ catch (Exception ex)
 
 ### Демонстрация работы
 1.  Проверка ошибоки ввода. <br>
-![](lab1/resources/exceptions.gif)
+![](resources/exceptions.gif)
 2.  Проверка ошибоки нехватки памяти. <br>
-![](lab1/resources/memory.gif)
+![](resources/memory.gif)
 3.  Выделение памяти процессу при N = 500 <br>
-![](lab1/resources/manager.gif)
+![](resources/manager.gif)
 4.  Проверка условия остановки цикла. <br>
 Выполним для небольшой матрицы, чтобы была больше вероятность остановки. <br>
-![](lab1/resources/stop.gif)
+![](resources/stop.gif)
