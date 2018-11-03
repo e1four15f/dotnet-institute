@@ -23,20 +23,22 @@ namespace lab2
 
             byte[] bytes = File.ReadAllBytes(input);
 
+            string[] cd_codes = new string[bytes.Length];
             int size = 0;
-            foreach (byte b in bytes)
+            for (int i = 0; i < bytes.Length; i++)
             {
-                size += cd.Code()[Convert.ToChar(b)].Length;
+                cd_codes[i] = cd.Code()[Convert.ToChar(bytes[i])];
+                size += cd_codes[i].Length;
             }
 
             BitArray bits = new BitArray(size);
 
             int index = 0;
-            foreach (byte b in bytes)
+            for (int i = 0; i < bytes.Length; i++)
             {
-                for (int i = 0; i < cd.Code()[Convert.ToChar(b)].Length; i++, index++)
+                for (int j = 0; j < cd_codes[i].Length; j++, index++)
                 {
-                    bits[index] = (cd.Code()[Convert.ToChar(b)][i] == '1') ? true : false;
+                    bits[index] = (cd_codes[i][j] == '1') ? true : false;
                 }
             }
 

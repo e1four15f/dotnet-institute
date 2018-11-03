@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace lab2
 {
@@ -28,6 +29,7 @@ namespace lab2
 
         public BitArray GetBinaryHeader(byte offset)
         {
+            Console.WriteLine("Writing binary header...");
             string str = "";
 
             foreach (KeyValuePair<char, string> kvp in code)
@@ -46,6 +48,7 @@ namespace lab2
 
         public BitArray ReadBinaryHeader(byte[] all) 
         {
+            Console.WriteLine("Reading binary header...");
             byte offset = all[0];
 
             bool[] bools = new bool[all.Length * 8 - 8 - offset];
@@ -97,6 +100,7 @@ namespace lab2
         {
             fd = new FrequencyDictionary(path);
 
+            Console.WriteLine("Building tree and code table...");
             foreach (KeyValuePair<char, int> kvp in fd.Freq())
             {
                 tree.Add(kvp.Key.ToString(), kvp.Value);
@@ -108,20 +112,23 @@ namespace lab2
                 string[] key = new String[2];
                 int value = 0;
 
-                for (int i = 0; i < 2; i++)
+                Parallel.For (0, 2, i =>
                 {
-                    key[i] += tree.Last().Key;
-                    if (key[i].Length > 0)
-                    {
-                        foreach (char c in key[i])
+                    lock (tree)
+                    { 
+                        key[i] += tree.Last().Key; 
+                        if (key[i].Length > 0)
                         {
-                            code[c] = i.ToString() + code[c];
+                            Parallel.ForEach<char> (key[i], c =>
+                            {
+                                code[c] = i.ToString() + code[c];
+                            });
                         }
+                        value += tree.Last().Value;
+                        tree.Remove(tree.Last().Key);
                     }
-                    value += tree.Last().Value;
-                    tree.Remove(tree.Last().Key);
-                }
-
+                });
+                
                 tree.Add(key[0] + key[1], value);
                 tree = Utils.SortDictionary(tree);
             }

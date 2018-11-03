@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,20 +15,17 @@ namespace lab2
         public FrequencyDictionary(string path)
         {
             freq = new Dictionary<char, int>();
+            Console.WriteLine("Creating frequency table...");
             ReadFile(path);
         }
         
         private void ReadFile(string path)
         {
-            using (StreamReader sr = new StreamReader(path))
+            string text = File.ReadAllText(path);
+            for (int i = 0; i < text.Length; i++)
             {
-                while (sr.Peek() >= 0)
-                {
-                    AddKey((char)sr.Read());
-                }
+                AddKey(text[i]);
             }
-
-            freq = Utils.SortDictionary(freq);
         }
 
         private void AddKey(char key)
@@ -38,7 +36,7 @@ namespace lab2
             }
             else
             {
-                freq[key] += 1;
+                freq[key]++;
             }
         }
         

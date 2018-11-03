@@ -13,8 +13,7 @@ namespace lab2
         private static string input, output;
 
         static void Main(string[] args)
-        {
-            //TESTMODE();
+        {   
             while (true)
             {
                 try
@@ -65,48 +64,17 @@ namespace lab2
                             Console.WriteLine("Creation done with " + timer.Elapsed + "\n");
                         }
 
-                        else { throw new Exception("Invalid string format\n"); }
+                        else { throw new FormatException("Invalid string format\n"); }
                     }
                     
-                    else { throw new Exception("Invalid string format\n"); }
+                    else { throw new FormatException("Invalid string format\n"); }
                 }
-                catch (Exception ex)
+                
+                catch (FormatException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
             }
         }
-
-        private static void TESTMODE()
-        {
-            Console.WriteLine("TESTMODE");
-            TimeSpan time = new TimeSpan();
-            string input, output;
-
-            input = path + "TESTMODE.txt";
-            output = path + "TESTMODE.bin";
-            
-            string[] str = Console.ReadLine().Split(' ');
-            int count = int.Parse(str[0]), size = int.Parse(str[1]);
-            Utils.CreateTextFile(input, size);
-
-            for (int i = 0; i < count; i++)
-            {
-                Console.WriteLine("Packing " + (i + 1) + " of " + count);
-
-                Stopwatch timer = new Stopwatch();
-                timer.Start();
-                Packer.Pack(input, output);
-                timer.Stop();
-
-                time += timer.Elapsed;
-            }
-
-            Console.WriteLine("Done testing in " + time);
-            Console.Read();
-            Environment.Exit(0);
-        }
-
-
     }
 }

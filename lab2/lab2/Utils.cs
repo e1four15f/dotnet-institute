@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace lab2
 {
@@ -12,7 +14,7 @@ namespace lab2
         {
             return File.ReadAllBytes(path).Length;
         }
-
+        
         public static Dictionary<char, int> SortDictionary(Dictionary<char, int> dict)
         {
             Dictionary<char, int> temp = new Dictionary<char, int>();
@@ -32,7 +34,7 @@ namespace lab2
             }
             return temp;
         }
-
+        
         public static BitArray Append(BitArray A, BitArray B)
         {
             bool[] bools = new bool[A.Count + B.Count];
@@ -46,13 +48,20 @@ namespace lab2
             string chars = "123467890ABCDEFGHJKLMNPQRTUVWXYZabcdefghjkmnpqrtuvwxyz!@#$%^&*()-=_+|{}][';~";
             Random rng = new Random();
 
-            string content = "";
-            for (int i = 0; i < size * 1024; i++)
+            List<char> content = new List<char>();
+            Parallel.For(0, size * 4, i =>
             {
-                content += chars.Substring(rng.Next(chars.Length), 1);
-            }
+                char c = chars[rng.Next(chars.Length)];
+                for (int j = 0; j < 256; j++)
+                {
+                    lock (content)
+                    {
+                        content.Add(c);
+                    }
+                }
+            });
 
-            File.WriteAllText(filename, content);
+            File.WriteAllText(filename, string.Join("", content.ToArray()));
         }
     }
 }
