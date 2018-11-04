@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -26,15 +25,16 @@ namespace lab5
         private TcpListener listener;
         private int port;
 
-        public int Port
-        {
-            get { return port; }
-        }
+        public int Port { get { return port; } }
 
         public TCPIPServer(string path, int port)
         {
             this.rootDirectory = path;
             this.port = port;
+        }
+
+        public void Start()
+        {
             serverThread = new Thread(this.Listen);
             serverThread.Start();
         }
@@ -90,13 +90,14 @@ namespace lab5
         {
             string extension = Path.GetExtension(file);
             string contentType = extensions.ContainsKey(extension) ? extensions[extension] : "application/octet-stream";
+
+            byte[] input = File.ReadAllBytes(file);
             long contentLength = File.ReadAllBytes(file).Length;
 
             string header = "HTTP/1.1 200 OK\nContent-Type: " + contentType + 
                 "\nContent-Length: " + contentLength + "\n\n";
 
             byte[] headerBytes = Encoding.ASCII.GetBytes(header);
-            byte[] input = File.ReadAllBytes(file);
 
             byte[] responseBytes = new byte[headerBytes.Length + input.Length];
             Array.Copy(headerBytes, 0, responseBytes, 0, headerBytes.Length);
@@ -105,22 +106,10 @@ namespace lab5
             return responseBytes;
         }
 
-        private byte[] HeaderBytes(string file)
-        {
-            string extension = Path.GetExtension(file);
-            string contentType = extensions.ContainsKey(extension) ? extensions[extension] : "application/octet-stream";
-            long contentLength = File.ReadAllText(file).Length;
-
-            string header = "HTTP/1.1 200 OK\nContent-Type: " + contentType +
-                "\nContent-Length: " + contentLength + "\n\n";
-
-            return Encoding.ASCII.GetBytes(header);
-        }
-
         public void Stop()
         {
-            serverThread.Abort();
             listener.Stop();
+            serverThread.Abort();
         }
     }
 }

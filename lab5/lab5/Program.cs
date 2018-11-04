@@ -10,9 +10,10 @@ namespace lab5
         static void Main(string[] args)
         {
             server = new TCPIPServer("../../files", 322);
+            server.Start();
             Console.WriteLine("Server is running on this port: " + server.Port);
-
-            Thread exitThread = new Thread(new ThreadStart(Exit));
+            
+            Thread exitThread = new Thread(Exit);
             exitThread.Start();
         }
 
@@ -25,7 +26,7 @@ namespace lab5
                     server.Stop();
                     Console.WriteLine("Server was stopped!");
                     Thread.Sleep(1500);
-                    break;
+                    Environment.Exit(0);
                 }
             }
         }
