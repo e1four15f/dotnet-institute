@@ -210,3 +210,7 @@ public static void Exit()
 2.  Спрячем пару файлов, чтобы посмотреть на ошибки в консоли
 
 ![](resources/errors.gif)
+
+Если убрать index.html, то браузер, не получив главного файла, не будет запрашивать остальные  
+
+![](resources/without_index.gif)
