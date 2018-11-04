@@ -306,6 +306,7 @@ public IEnumerable<Payment> GetPayments(IEnumerable<Bill> bills, IEnumerable<Pay
 В таком случае программа прекращает свою работу
 
 4.  Количество строк в программе, счёт идёт только по строкам кода
+
 Всего получается 183 строк
 -   Bill.cs - 18
 -   PayDoc.cs - 18
