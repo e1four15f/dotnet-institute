@@ -21,53 +21,42 @@ namespace lab3
         public void BuildIndex()
         {
             Console.WriteLine("Indexing " + Path.GetFileName(file));
-            using (StreamReader sr = File.OpenText(file))
+            fullText = File.ReadAllText(file);
+
+            string punctuation = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\t\r";
+
+            string word = "";
+
+            for (int i = 0; i < fullText.Length; i++)
             {
-                string punctuation = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\t\r";
-
-                string word = "";
-                int position = 0;
-
-                while (sr.Peek() >= 0)
+                char c = char.ToLower(fullText[i]); 
+                if (!punctuation.Contains(c))
                 {
-                    char c = char.ToLower((char)sr.Read()); 
-                    if (!punctuation.Contains(c))
+                    if (c == ' ' || c == '\n')
                     {
-                        if (c == ' ' || c == '\n')
+                        if (!word.Equals(""))
                         {
-                            if (!word.Equals(""))
-                            {
-                                text.Add(position - word.Length, word);
-                                word = "";
-                            }
-                        }
-                        else
-                        {
-                            word += c;
+                            text.Add(i - word.Length, word);
+                            word = "";
                         }
                     }
-                    position++;
+                    else
+                    {
+                        word += c;
+                    }
                 }
             }
-            fullText = File.ReadAllText(file);
+            
         }
 
         public List<string> Find(string phrase)
         {
-            string[] words = phrase.Split(' ');
-            string filename = Path.GetFileName(file);
-
-            phraseLength = 0;
-            for (int i = 0; i < words.Length; i++)
-            {
-                phraseLength += words[i].Length;
-                words[i] = words[i].ToLower();
-            }
+            string[] words = phrase.ToLower().Split(' ');
+            phraseLength = phrase.Length - words.Length + 1;
 
             List<string> phrases = new List<string>();
+            
             int count = 0, position = 0;
-            phrase = "";
-
             foreach (KeyValuePair<int, string> kvp in text)
             {
                 position = count == 0 ? kvp.Key : position;
@@ -93,14 +82,27 @@ namespace lab3
             string phrase = "...";
             for (int i = 0; i < phraseLength + 40; i++)
             {
-                char c = fullText[line + i - 20];
-                if (c.Equals('\n') || c.Equals('\r'))
-                {
-                    c = ' ';
+                if (line + i - 20 >= 0)
+                { 
+                    char c = fullText[line + i - 20];
+                    if (c.Equals('\n') || c.Equals('\r'))
+                    {
+                        c = ' ';
+                    }
+                    phrase += c;
                 }
-                phrase += c;
             }
             return phrase + "...";
+        }
+
+        public override string ToString()
+        {
+            string result = "";
+            foreach (KeyValuePair<int, string> kvp in text)
+            {
+                result += kvp.Key + "\t" + kvp.Value + "\n";
+            }
+            return result;
         }
     }
 }

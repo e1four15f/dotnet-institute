@@ -66,11 +66,11 @@ namespace lab3
         public override string ToString()
         {
             string str = "";
-            foreach (KeyValuePair<string, List<string>> kvp in results)
+            foreach (KeyValuePair<string, List<string>> kvp in results.OrderBy(x => x.Value.Count))
             {
                 if (kvp.Value.Count != 0)
                 {
-                    str += "\n\t" + kvp.Key + "\n";
+                    str += "\n\t" + kvp.Key + " : " + kvp.Value.Count +"\n";
                     foreach (string s in kvp.Value)
                     {
                         str += s + "\n";

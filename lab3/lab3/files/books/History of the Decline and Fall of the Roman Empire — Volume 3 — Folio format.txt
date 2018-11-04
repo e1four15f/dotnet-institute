@@ -1,0 +1,13 @@
+﻿
+ATTENTION:
+
+The xml file included in this set has the following warning about the folio file (900-n.nfo):
+
+DO NOT DOWNLOAD !!! see #892 for HTML format, #733 for plain text.
+The Folio format is obsolete. You won't be able to display the file.
+
+If you are tempted to try and download it anyway, you may expect your computer to crash!
+
+These files are being retained in the Project Gutenberg collection as examples of the obsolete formats of the early days.
+
+DW
