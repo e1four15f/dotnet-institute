@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Bills>
-	<Bill Client="Омский Газмяс" Date="23.02.2015" Number="0045345" Sum="12567.23"/>
-	<Bill Client="Медсервис" Date="05.04.2016" Number="001567" Sum="200"/>
+	<Bill Client="Омский Газмяс" Date="23.02.2018" Number="0045345" Sum="12567.23"/>
+	<Bill Client="Омский Газмяс" Date="05.04.2018" Number="001567" Sum="8040"/>
 	<Bill Client="Медсервис" Date="23.12.2016" Number="053234" Sum="190"/>
-	<Bill Client="Медсервис" Date="01.03.2016" Number="0312358" Sum="220.50"/>
-	<Bill Client="Стройдвор" Date="01.02.2016" Number="b-54356" Sum="40"/>
+	<Bill Client="Школа" Date="01.03.2016" Number="0312358" Sum="220.50"/>
+	<Bill Client="Школа" Date="01.02.2016" Number="b-54356" Sum="40"/>
 	<Bill Client="Стройдвор" Date="05.06.2016" Number="b-3654" Sum="50"/>
-	<Bill Client="Стройдвор" Date="21.03.2016" Number="b-45645" Sum="120.50"/>
+	<Bill Client="Школа" Date="21.03.2016" Number="b-45645" Sum="874"/>
 	<Bill Client="Стройдвор" Date="17.04.2016" Number="b-9876" Sum="5"/>
 </Bills>

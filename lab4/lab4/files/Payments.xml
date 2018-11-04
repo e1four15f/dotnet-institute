@@ -1,19 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Payments>
-  <Payment Client="Медсервис" PayDocDate="01.02.2016" PayDocNumber="p9456" BillDate="01.03.2016" BillNumber="0312358" Sum="100.5" />
-  <Payment Client="Стройдвор" PayDocDate="06.02.2016" PayDocNumber="s977" BillDate="01.02.2016" BillNumber="b-54356" Sum="40" />
-  <Payment Client="Медсервис" PayDocDate="01.02.2016" PayDocNumber="p9454" BillDate="01.03.2016" BillNumber="0312358" Sum="120" />
-  <Payment Client="Стройдвор" PayDocDate="06.02.2016" PayDocNumber="s977" BillDate="21.03.2016" BillNumber="b-45645" Sum="10" />
-  <Payment Client="Стройдвор" PayDocDate="23.02.2016" PayDocNumber="k943" BillDate="21.03.2016" BillNumber="b-45645" Sum="30" />
-  <Payment Client="Стройдвор" PayDocDate="12.04.2016" PayDocNumber="i1235" BillDate="21.03.2016" BillNumber="b-45645" Sum="60" />
-  <Payment Client="Стройдвор" PayDocDate="07.07.2016" PayDocNumber="l44" BillDate="21.03.2016" BillNumber="b-45645" Sum="20" />
-  <Payment Client="Стройдвор" PayDocDate="06.02.2017" PayDocNumber="o95" BillDate="21.03.2016" BillNumber="b-45645" Sum="0.5" />
-  <Payment Client="Медсервис" PayDocDate="01.02.2016" PayDocNumber="p9454" BillDate="05.04.2016" BillNumber="001567" Sum="30" />
-  <Payment Client="Медсервис" PayDocDate="01.02.2016" PayDocNumber="p123" BillDate="05.04.2016" BillNumber="001567" Sum="70" />
-  <Payment Client="Медсервис" PayDocDate="05.04.2016" PayDocNumber="p123" BillDate="05.04.2016" BillNumber="001567" Sum="100" />
-  <Payment Client="Стройдвор" PayDocDate="06.02.2017" PayDocNumber="o95" BillDate="17.04.2016" BillNumber="b-9876" Sum="5" />
-  <Payment Client="Стройдвор" PayDocDate="06.02.2017" PayDocNumber="o95" BillDate="05.06.2016" BillNumber="b-3654" Sum="50" />
-  <Payment Client="Медсервис" PayDocDate="05.04.2016" PayDocNumber="p123" BillDate="23.12.2016" BillNumber="053234" Sum="100" />
+  <Payment Client="Школа" PayDocDate="20.02.2010" PayDocNumber="p9455" BillDate="01.02.2016" BillNumber="b-54356" Sum="10" />
+  <Payment Client="Школа" PayDocDate="12.04.2016" PayDocNumber="i1235" BillDate="01.02.2016" BillNumber="b-54356" Sum="30" />
+  <Payment Client="Школа" PayDocDate="12.04.2016" PayDocNumber="i1235" BillDate="01.03.2016" BillNumber="0312358" Sum="30" />
+  <Payment Client="Школа" PayDocDate="07.07.2016" PayDocNumber="l44" BillDate="01.03.2016" BillNumber="0312358" Sum="20" />
+  <Payment Client="Стройдвор" PayDocDate="06.02.2016" PayDocNumber="s977" BillDate="17.04.2016" BillNumber="b-9876" Sum="5" />
   <Payment Client="Медсервис" PayDocDate="01.07.2016" PayDocNumber="p9445" BillDate="23.12.2016" BillNumber="053234" Sum="30.5" />
-  <Payment Client="Медсервис" PayDocDate="20.02.2017" PayDocNumber="p9455" BillDate="23.12.2016" BillNumber="053234" Sum="10" />
+  <Payment Client="Стройдвор" PayDocDate="06.02.2016" PayDocNumber="s977" BillDate="05.06.2016" BillNumber="b-3654" Sum="45" />
+  <Payment Client="Стройдвор" PayDocDate="23.02.2016" PayDocNumber="k943" BillDate="05.06.2016" BillNumber="b-3654" Sum="5" />
+  <Payment Client="Медсервис" PayDocDate="01.02.2018" PayDocNumber="p123" BillDate="23.12.2016" BillNumber="053234" Sum="70" />
+  <Payment Client="Омский Газмяс" PayDocDate="01.02.2016" PayDocNumber="p9456" BillDate="05.04.2018" BillNumber="001567" Sum="100.5" />
+  <Payment Client="Омский Газмяс" PayDocDate="01.02.2016" PayDocNumber="p9454" BillDate="23.02.2018" BillNumber="0045345" Sum="150" />
+  <Payment Client="Омский Газмяс" PayDocDate="05.04.2016" PayDocNumber="p123" BillDate="23.02.2018" BillNumber="0045345" Sum="2000" />
 </Payments>

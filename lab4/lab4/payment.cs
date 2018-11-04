@@ -4,11 +4,21 @@ namespace lab4
 {
     class Payment 
     {
-        public string client;
-        public DateTime payDocDate;
-        public string payDocNumber;
-        public DateTime billDate;
-        public string billNumber;
+        private string client;
+        public string Client { get { return client; } }
+
+        private DateTime payDocDate;
+        public DateTime PayDocDate { get { return payDocDate; } }
+
+        private string payDocNumber;
+        public string PayDocNumber { get { return payDocNumber; } }
+
+        private DateTime billDate;
+        public DateTime BillDate { get { return billDate; } }
+
+        private string billNumber;
+        public string BillNumber { get { return billNumber; } }
+
         public double sum;
 
         public Payment(string client, DateTime payDocDate, string payDocNumber,
