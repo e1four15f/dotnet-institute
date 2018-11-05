@@ -6,13 +6,13 @@ namespace lab6
     {
         static void Main(string[] args)
         {
-            IRepository repository = RepositoryFactory.GetRepository(true);
+            IRepository repository = RepositoryFactory.GetRepository();
             Console.WriteLine(repository);
-            PrintInfo(repository);
+            Calculate(repository);
             Console.Read();
         }
 
-        public static void PrintInfo(IRepository repository)
+        public static void Calculate(IRepository repository)
         {
             Console.WriteLine("Bills");
             Console.WriteLine("{0, 15}{1, 15}{2, 15}{3, 15}",

@@ -4,9 +4,15 @@ namespace lab6
 {
     class PayDoc
     {
-        public string client;
-        public DateTime date;
-        public string number;
+        private string client;
+        public string Client { get { return client; } }
+
+        private DateTime date;
+        public DateTime Date { get { return date; } }
+
+        private string number;
+        public string Number { get { return number; } }
+
         public double sum;
 
         public PayDoc(string client, DateTime date, string number, double sum)

@@ -26,7 +26,7 @@ namespace lab6
 
                 foreach (DataRow row in bills.Rows)
                 {
-                    Bill bill;
+                    Bill bill = null;
                     try
                     {
                         bill = new Bill(row["client"].ToString(), 
@@ -37,7 +37,8 @@ namespace lab6
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
-                        continue;
+                        Console.ReadKey();
+                        System.Environment.Exit(1);
                     }
                     yield return bill;
                 }
@@ -55,7 +56,7 @@ namespace lab6
 
                 foreach (DataRow row in payDocs.Rows)
                 {
-                    PayDoc payDoc;
+                    PayDoc payDoc = null;
                     try
                     {
                         payDoc = new PayDoc(row["client"].ToString(),
@@ -66,7 +67,8 @@ namespace lab6
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
-                        continue;
+                        Console.ReadKey();
+                        System.Environment.Exit(1);
                     }
                     yield return payDoc;
                 }
@@ -80,15 +82,16 @@ namespace lab6
                 cnn.Open();
                 foreach (Payment payment in payments)
                 { 
-                    var insertBill = new SqlCommand(@"INSERT INTO dbo.Payments (PayDocId, BillId, Sum) VALUES (@payDocId, @billId, @sum)", cnn);
+                    var insertBill = new SqlCommand(@"INSERT INTO dbo.Payments (PayDocId, BillId, Sum)
+                        VALUES (@payDocId, @billId, @sum)", cnn);
 
                     var BillId = new SqlCommand(@"SELECT Bills.Id FROM dbo.Bills WHERE bills.Number = '" 
-                        + payment.billNumber + "'", cnn).ExecuteScalar();
+                        + payment.BillNumber + "'", cnn).ExecuteScalar();
                     var PayDocId = new SqlCommand(@"SELECT PayDocs.Id FROM dbo.PayDocs WHERE PayDocs.Number = '"
-                        + payment.payDocNumber + "'", cnn).ExecuteScalar();
+                        + payment.PayDocNumber + "'", cnn).ExecuteScalar();
 
-                    insertBill.Parameters.AddWithValue("@payDocId", Convert.ToInt32(PayDocId));
                     insertBill.Parameters.AddWithValue("@billId", Convert.ToInt32(BillId));
+                    insertBill.Parameters.AddWithValue("@payDocId", Convert.ToInt32(PayDocId));
                     insertBill.Parameters.AddWithValue("@sum", payment.sum);
                     insertBill.ExecuteNonQuery();
                 }

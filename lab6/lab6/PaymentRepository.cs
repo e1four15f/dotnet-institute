@@ -24,18 +24,19 @@ namespace lab6
             XDocument doc = XDocument.Load(billsPath);
             foreach (XElement e in doc.Root.Nodes())
             {
-                Bill bill;
+                Bill bill = null;
                 try
                 {
-                    bill = new Bill(e.Attribute("Client").Value, 
+                    bill = new Bill(e.Attribute("Client").Value,
                         DateTime.Parse(e.Attribute("Date").Value),
-                        e.Attribute("Number").Value, 
+                        e.Attribute("Number").Value,
                         Double.Parse(e.Attribute("Sum").Value, CultureInfo.InvariantCulture));
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    continue;
+                    Console.ReadKey();
+                    System.Environment.Exit(1);
                 }
                 yield return bill;
             }
@@ -46,7 +47,7 @@ namespace lab6
             string[] csv = File.ReadAllLines(payDocsPath);
             for (int i = 1; i < csv.Length; i++)
             {
-                PayDoc payDoc;
+                PayDoc payDoc = null;
                 try
                 {
                     string[] data = csv[i].Split(';');
@@ -56,7 +57,8 @@ namespace lab6
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    continue;
+                    Console.ReadKey();
+                    System.Environment.Exit(1);
                 }
                 yield return payDoc;
             }
@@ -69,11 +71,11 @@ namespace lab6
             foreach (Payment payment in payments)
             {
                 doc.Root.Add(new XElement("Payment",
-                    new XAttribute("Client", payment.client),
-                    new XAttribute("PayDocDate", payment.payDocDate.ToString("dd.MM.yyyy")),
-                    new XAttribute("PayDocNumber", payment.payDocNumber),
-                    new XAttribute("BillDate", payment.billDate.ToString("dd.MM.yyyy")),
-                    new XAttribute("BillNumber", payment.billNumber),
+                    new XAttribute("Client", payment.Client),
+                    new XAttribute("PayDocDate", payment.PayDocDate.ToString("dd.MM.yyyy")),
+                    new XAttribute("PayDocNumber", payment.PayDocNumber),
+                    new XAttribute("BillDate", payment.BillDate.ToString("dd.MM.yyyy")),
+                    new XAttribute("BillNumber", payment.BillNumber),
                     new XAttribute("Sum", payment.sum)));
             }
 
