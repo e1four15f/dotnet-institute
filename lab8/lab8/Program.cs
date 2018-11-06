@@ -16,6 +16,7 @@ namespace lab8
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             Application.Run(new MyForm());
         }
     }

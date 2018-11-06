@@ -35,7 +35,7 @@
             // 
             this.Button.Location = new System.Drawing.Point(12, 12);
             this.Button.Name = "Button";
-            this.Button.Radius = 50;
+            this.Button.Radius = 5;
             this.Button.Size = new System.Drawing.Size(260, 237);
             this.Button.TabIndex = 0;
             this.Button.Text = "MyButton";
@@ -49,6 +49,7 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.Button);
             this.Name = "MyForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MyForm";
             this.Load += new System.EventHandler(this.Form_Load);
             this.ResumeLayout(false);

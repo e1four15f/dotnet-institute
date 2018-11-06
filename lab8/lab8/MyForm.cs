@@ -26,12 +26,7 @@ namespace lab8
 
         private void myButton_Centered(object sender, MouseEventArgs e)
         {
-            MyButton button = (MyButton)sender;
-            if (Math.Sqrt(Math.Pow((e.X - button.Width / 2), 2) + Math.Pow((e.Y - button.Height / 2), 2)) <= button.Radius)
-            {
-                button.BackColor = Color.Cyan;
-                MessageBox.Show("Centered!");
-            }
+            MessageBox.Show("Centered!");
         }
     }
 }

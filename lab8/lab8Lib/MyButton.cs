@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace lab8Lib
 {
@@ -8,9 +9,14 @@ namespace lab8Lib
         public int Radius { get; set; }
 
         public event MouseEventHandler Centered;
+        
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            Centered(this, e);
+            if (Math.Sqrt(Math.Pow((e.X - Width / 2), 2) + Math.Pow((e.Y - Height / 2), 2)) <= Radius)
+            {
+                BackColor = Color.Cyan;
+                Centered(this, e);
+            }
         }
     }
 }
