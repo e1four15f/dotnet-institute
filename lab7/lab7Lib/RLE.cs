@@ -4,71 +4,65 @@ using System.Text;
 
 namespace lab7Lib
 {
-    public class RLE
+    public abstract class RLE
     {
-        public byte[] Pack(byte[] data)
+        public static byte[] Pack(byte[] data)
         {
-            List<char> list = new List<char>();
+            string input = Encoding.UTF8.GetString(data) + " ";
+            string packData = "";
 
-            int length = 1;
-            byte current = data[0];
+            int count = 1;
+            char current = input[0];
 
-            for (int i = 1; i < data.Length; i++)
+            for (int i = 1; i < input.Length; i++)
             {
-                if (data[i] == current)
+                if (input[i] == current)
                 {
-                    length++;
+                    count++;
                 }
 
-                if (data[i] != current || i + 1 == data.Length)
+                if (input[i] != current || i + 1 == input.Length)
                 {
-                    foreach (char c in length.ToString())
-                    {
-                        list.Add(c);
-                    }
-                    list.Add((char)current);
-                    list.Add(' ');
-
-                    length = 1;
-                    current = data[i];
+                    packData += count.ToString() + current + " ";
+                    count = 1;
+                    current = input[i];
                 }
             }
 
-            return Encoding.UTF8.GetBytes(list.ToArray());
+            return Encoding.UTF8.GetBytes(packData);
         }
 
-        public byte[] Unpack(byte[] data)
+        public static byte[] Unpack(byte[] data)
         {
-            string content = Encoding.UTF8.GetString(data);
+            string input = Encoding.UTF8.GetString(data);
             string digits = "0123456789";
             
-            string result = "";
-            string length = "";
+            string unpackData = "", count = "";
             char current = '\n';
 
-            for (int i = 0; i < content.Length; i++)
+            for (int i = 0; i < input.Length; i++)
             {
-                if (digits.IndexOf(content[i]) != -1)
+                if (digits.IndexOf(input[i]) != -1)
                 {
-                    length += content[i];
+                    count += input[i];
                 }
 
-                else if (content[i] == ' ')
+                else if (input[i] == ' ')
                 {
-                    for (int j = 0; j < int.Parse(length); j++)
+                    for (int j = 0; j < int.Parse(count); j++)
                     {
-                        result += current;
+                        unpackData += current;
                     }
-                    length = "";
+                    count = "";
                 }
 
                 else
                 {
-                    current = content[i];
+                    current = input[i];
                 }
             }
 
-            return Encoding.UTF8.GetBytes(result);
+            return Encoding.UTF8.GetBytes(unpackData);
         }
     }
 }
